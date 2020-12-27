@@ -1,0 +1,75 @@
+---
+title: "1. gyakorlat"
+author: "Marcell Granát"
+date: '2020 11 11 '
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, error = F, warning = F, message = F, tidy = T)
+```
+
+```{r}
+data(wage1, package = 'wooldridge')
+attach(wage1)
+```
+
+```{r}
+mean(wage)
+mean(educ)
+```
+
+```{r}
+hist(wage)
+```
+
+```{r}
+boxplot(wage)
+```
+
+```{r}
+log_wage <- log(wage)
+```
+
+```{r}
+quantile(wage, probs = c(.1, .9))
+```
+
+"Legegyszerűbb kapcsolatvizsgálat egy plot"
+
+```{r}
+plot(exper, wage)
+```
+
+```{r}
+cor(exper, wage)
+```
+
+Bár az ábrán is látszik, hogy nem lineáris lesz a kapcsolat.
+
+### Bér külön férfiakra és nőkre:
+
+```{r}
+mean(wage[female == 1])
+mean(wage[female == 0])
+sd(wage[female == 1])
+sd(wage[female == 0])
+```
+
+```{r}
+mean(wage[female == 1])+1.96*sd(wage[female == 1])/sqrt(526)*c(-1, 1)
+```
+
+```{r}
+t.test(wage[female == 1], wage[female == 0], mu = 0, paired = F)
+```
+
+```{r}
+uj_adatok <- data.frame(wage, educ, exper, tenure)
+cor(uj_adatok)
+```
+
+```{r}
+data(bwght, package = "wooldridge")
+attach(bwght)
+```

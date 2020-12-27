@@ -1,0 +1,112 @@
+---
+title: "4. gyakorlat"
+author: "Marcell Granát"
+date: '2020 12 02 '
+output: github_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE, warning=F}
+knitr::opts_chunk$set(echo = F, comment = "", warning = F, message = F, cache = F, dev = "svg", error = T)
+library(tidyverse)
+```
+
+```{r}
+data(mlb1, package = "wooldridge")
+mlb1 %>% glimpse()
+```
+
+Baseballos adatbázis.
+
+```{r}
+attach(mlb1)
+```
+
+Fizetésekről tudjuk, hogy általában jobbra elnyúló.
+
+```{r}
+ggpubr::ggarrange(
+ggplot(mlb1, aes(salary)) + geom_histogram(),
+ggplot(mlb1, aes(lsalary)) + geom_histogram()
+)
+```
+
+
+```{r}
+model1 <- lm(lsalary ~ years + gamesyr +bavg+hrunsyr+rbisyr)
+model1 %>% summary()
+```
+
+Mivel az eredményváltozó van logaritmizálva, így a years egységnyi változása okozza a kereset százalékos változását.
+
+```{r}
+meret <- round(.35*nrow(mlb1), 0)
+mlb2 <- mlb1[sample(1:nrow(mlb1), meret, replace = F), ] # a sample from the pop
+model2 <- lm(data = mlb2, lsalary ~ years + gamesyr +bavg+hrunsyr+rbisyr)
+```
+
+Ugyanaz a becslés, csak nema  teljes sokasságon, hanem egy mintán.
+
+```{r}
+stargazer::stargazer(model1, model2, type = "text")
+```
+
+A standard hiba gyökösen csökken a mintaméret függvényében.
+
+$Var(\hat{\beta_j})=\frac{\hat{\sigma_u^2}}{SST_j} $
+
+```{r}
+model3 <- lm(data = mlb1, lsalary ~ gamesyr +bavg+hrunsyr+rbisyr)
+stargazer::stargazer(model1, model3, type = 'text')
+```
+
+A többi változónak lecsökkent a standard hibája. ---> **MULTIKOLLINEARITÁS**
+
+```{r}
+car::vif(model1)
+```
+
+```{r}
+model4 <- lm(lsalary ~ gamesyr + years)
+anova(model1, model4)
+```
+
+```{r}
+model5 <- lm(lsalary ~ gamesyr + years + bavg + rbisyr)
+model6 <- lm(lsalary ~ gamesyr + years + rbisyr)
+stargazer::stargazer(model1, model4, model5, model6, type = 'text')
+```
+
+
+```{r}
+anova(model1, model6)
+```
+
+# Van-e heterosked?
+
+```{r}
+library(lmtest)
+bptest(model6) # Breusch-Pagan test
+```
+
+**Breusch-Pagan test**: H0 > Hibatag szorasa allando
+
+Ha fennálll a heteroszkedaszticitás, akkor a standard hibáink nem lesznek helyesek -> white-féle standard hibák.
+
+```{r}
+coeftest(model6) # need to add a vcov param
+```
+
+# Interaction
+
+```{r}
+rm(mlb1)
+data(wage2, package = "wooldridge")
+attach(wage2)
+```
+
+```{r}
+lm(lwage ~ educ + exper + educ*exper) %>% broom::tidy()
+```
+

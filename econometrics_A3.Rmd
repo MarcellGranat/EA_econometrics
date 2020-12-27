@@ -1,0 +1,273 @@
+---
+title: "Ökonometria"
+subtitle: "3. házi feladat"
+author: "Granát Marcell"
+date: \today
+output: 
+  pdf_document: 
+    fig_caption: yes
+    toc: yes
+header-includes:
+- \usepackage{fancyhdr}
+- \usepackage[hungarian]{babel}
+- \usepackage{natbib}
+- \pagestyle{fancy}
+- \fancyhf{}
+- \fancyhead[LE,RO]{Marcell Granát}
+- \fancyhead[RE,LO]{\leftmark}
+- \fancyfoot[C]{\thepage}
+- \usepackage{lscape}
+- \usepackage{pdfpages}
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE, warning=F}
+knitr::opts_chunk$set(echo = F, comment = "", warning = F, message = F, cache = F, dev = "cairo_pdf", error = T)
+```
+
+*A mellékelt bptempm.csv fájl tartalmazza a budapesti havi átlaghőmérsékletet 1901 januárja és 2000 decembere között. (A read.csv függvény használható az adatok beolvasására.) A hallgatóknak különböző, 60 éves idősorokat kell elemezniük, a Neptun-kódjuk első karaktere alapján: 1901-1960 (A-C), 1911-1970 (D-F), 1921-1980 (G-I), 1931-1990 (J-P), 1940-1999 (Q-Z vagy szám).*
+
+```{r}
+library(tidyverse)
+library(granatlib) # my personal package: https://github.com/MarcellGranat/granatlib
+library(tseries)
+library(forecast)
+theme_set(theme_granat())
+rio::import('bptempm.csv') %T>% 
+  {filter(., ym < 196101) %T>%  # data import, NEPTUN: AYCOPF
+      {dat <<- .} %>%
+      pull(temp) %>%
+      ts(start = c(1969, 3), frequency = 12) %>%
+      {x <<- .} # as ts
+  } %>% mutate(
+    AR = lag(temp)
+  ) %>% 
+  filter(ym < 196201 & ym > 196012) %>% transmute(
+    t = V1,
+    m = as.factor(ym %% 100),
+    temp, AR
+  ) %>% 
+  {test_dat <<- .} # test data for 1.j
+```
+
+
+
+# 1. feladat
+
+## a)
+
+*Ábrázoljuk az idősor autokorreláció-függvényét! Mire utal a függvény alakja?*
+
+```{r fig.cap = "A budapesti havi átlaghőmérséklet autokorreláció függvényei", fig.height=3}
+x %>% {
+  ggpubr::ggarrange(
+    forecast::ggAcf(., size = 2, color = "chartreuse") + labs(title = ''),
+    forecast::ggAcf(., size = 2, type = 'partial', color = "chartreuse") +
+      labs(title = '')
+  )
+}
+```
+
+## b)♦
+
+*Illesszünk lineáris trendet és hónap-dummykat tartalmazó modellt az idősorra!*
+
+```{r}
+mod1 <- dat %>% transmute(
+  t = V1,
+  m = as.factor(ym %% 100),
+  temp = temp
+) %>% lm(formula = temp ~ .)
+```
+
+## c)
+
+*Értelmezzük a modell paramétereit!*
+
+```{r}
+f.month <- function(x) {
+  y <- switch(x,
+              't' = 'trend',
+              'm1' = 'január',
+              'm2' = 'február',
+              'm3' = 'március',
+              'm4' = 'április',
+              'm5' = 'május',
+              'm6' = 'június',
+              'm7' = 'július',
+              'm8' = 'augusztus',
+              'm9' = 'szeptermber',
+              'm10' = 'október',
+              'm11' = 'november',
+              'm12' = 'december', 
+              'AR' = 'AR',
+              'AR2' = 'AR(2)'
+  )
+  ifelse(is.null(y), x, y)
+}
+
+mod1 %>% broom::tidy() %>% 
+  select(1:2) %>% mutate(
+    term = sapply(term, f.month)
+  ) %>% 
+  prtbl(ufc = T)
+```
+
+## d)
+
+*Teszteljük, hogy a modell reziduálisai autokorreláltak-e!*
+
+```{r}
+f.Ljung.Box.p <- function(x) {
+  capture.output( # avoid redundant printing
+    checkresiduals(x, plot = F)
+  ) %>% .[5] %>% # main text description
+    str_remove('.*p-value = ') %>% # p-value of the test
+    as.numeric() %>% 
+    scales::percent(decimal.mark = ',', accuracy = .01)
+}
+
+answer_1d <- f.Ljung.Box.p(mod1)
+answer_1d
+```
+
+## e)
+
+*Illesszünk lineáris trendet, hónap-dummykat és elsőrendű autoregresszív tagot tartalmazó modellt az idősorra!*
+
+```{r}
+mod2 <- dat %>% transmute(
+  t = V1,
+  m = as.factor(ym %% 100),
+  AR = lag(temp),
+  temp = temp
+) %>% na.omit() %>% 
+  lm(formula = temp ~ .)
+```
+
+## f)
+
+*Teszteljük, hogy a reziduálisok autokorreláltak-e!*
+
+```{r}
+answer_1f <- f.Ljung.Box.p(mod2)
+```
+
+## g)
+
+*Végül illesszünk lineáris trendet, hónap-dummykat és AR(2) tagokat tartalmazó modellt az idősorra!*
+
+```{r}
+mod3 <- dat %>% transmute(
+  t = V1,
+  m = as.factor(ym %% 100),
+  AR_2 = lag(temp, n = 2),
+  temp = temp
+) %>% na.omit() %>% 
+  lm(formula = temp ~ .)
+```
+
+## h)
+
+*A fenti három modell közül melyikkel vagyunk a legelégedettebbek?*
+
+```{r}
+answer_1h <- f.Ljung.Box.p(mod3)
+```
+
+## i)
+
+*Összességében van bizonyítékunk a klímaváltozásra ezen az időtávon Budapesten?*
+
+```{r}
+mod2 %>% 
+  broom::tidy() %>% 
+  mutate(
+    term = sapply(term, f.month)
+  ) %>% 
+  prtbl()
+```
+
+```{r fig.cap='A budapesti hőmérséklet előrejelzése az első 2 modellel'}
+data.frame(
+  t = 1:12,
+  temp = test_dat$temp,
+  mod1 =  predict.lm(mod1, newdata = test_dat),
+  mod2 = predict.lm(mod2, newdata = test_dat)
+) %>% pivot_longer(-1) %>% 
+  mutate(
+    name = case_when(
+      name == 'temp' ~ 'Valós érték',
+      name == 'mod1' ~ '1. modellből származó becslés',
+      name == 'mod2' ~ '2. modellből származó becslés',
+      T  ~ name
+    )
+  ) %>% 
+  ggplot(aes(t, value, color = name)) +
+  geom_line(size = 2) +
+  scale_color_viridis_d() +
+  scale_x_continuous(breaks = 1:12, expand = c(0, 0),
+                     labels = str_to_title(sapply(str_c('m', 1:12), f.month))) +
+  theme(axis.text.x = element_text(angle = 20, size = 9),
+        plot.margin = unit(c(1,3,1,1), "cm")
+  ) +
+  labs(x = '', y = expression(''*~degree*C*''), color = NULL)
+```
+
+# 2. feladat
+
+*A wooldridge package-ben szereplő earns adatbázist használjuk, amely a versenyszféra mezőgazdaságon kívüli ágazataira tartalmazza az éves egy munkaórára jutó kibocsátást (azaz a termelékenységet) (outphr) és az órabért (hrwage), valamint ezek növekedési ütemét (logaritmusának éves változását) (goutphr és ghrwage). Az A-L kezdetű vezetéknévvel rendelkező hallgatóknak az 1947-1979 éveket , az M-Zs kezdetű vezetéknévvel rendelkező hallgatóknak az 1957-1987 éveket kell vizsgálniuk.*
+
+```{r}
+data(earns, package = 'wooldridge')
+dat <- earns %>% 
+  filter(year <= 1979) # surname: Granát
+```
+
+
+## a)
+
+*Modellezzük először az órabér növekedési ütemét (ghrwage) a termelékenység növekedési üteme (goutphr) függvényében!*
+
+```{r}
+mod1 <- lm(data = dat, formula = ghrwage ~ goutphr)
+```
+
+## b)
+
+```{r}
+mod1 %>% broom::tidy() %>% prtbl()
+```
+
+```{r}
+f.Ljung.Box.p(mod1)
+```
+
+*Teszteljük, hogy goutphr becsült paramétere különbözik-e egytől! Hogyan használtuk fel a teszt elvégzése során a c. feladatrész eredményét?*
+
+```{r eval = F}
+mod1 %>% 
+  car::linearHypothesis('goutphr = 1') 
+```
+
+*Elemezzük ezután az órabér növekedési ütemét a termelékenység növekedési ütemének elsőrendű osztott késleltetésű modelljével!*
+
+```{r}
+library(dynlm)
+
+mod2 <- dynlm(data = dat, formula = ghrwage ~ L(goutphr))
+```
+
+
+```{r}
+mod2 %>% 
+  broom::tidy() %>% 
+  prtbl()
+```
+
+```{r}
+f.Ljung.Box.p(mod2)
+```
+
+

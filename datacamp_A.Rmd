@@ -1,0 +1,50 @@
+---
+title: "Datacamp"
+author: "Marcell Granát"
+date: '2020 12 02 '
+output: github_document
+editor_options: 
+  chunk_output_type: inline
+---
+
+```{r setup, include=FALSE, warning=F}
+knitr::opts_chunk$set(echo = F, comment = "", warning = F, message = F, cache = F, dev = "svg", error = T)
+library(tidyverse)
+library(broom)
+library(modelr)
+```
+
+```{r}
+data(mariokart, package = 'openintro')
+```
+
+```{r}
+mod <- lm(data = mariokart, formula = total_pr ~ duration + start_pr)
+```
+
+```{r}
+mariokart %>% 
+modelr::data_grid(
+  duration = modelr::seq_range(duration, by = 1),
+  start_pr = modelr::seq_range(start_pr, by = 1)
+) %>% augment(mod, newdata = .) %>% 
+  {ggplot() +
+  geom_point(data = mariokart, aes(duration, start_pr, color = total_pr)) +
+  geom_tile(data = ., aes(duration, start_pr, fill = .fitted), alpha = .5) +
+      scale_color_viridis_c(guide = F)
+    } %>% 
+  {p <- (.)
+  plotly::ggplotly(p)}
+```
+
+```{r}
+plotly::plot_ly(
+  data = mariokart, z = ~ total_pr, x = ~ duration, y = ~ start_pr, opacity = .6
+)
+```
+
+
+```{r}
+augment(mod,)
+```
+
