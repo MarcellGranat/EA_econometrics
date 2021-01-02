@@ -19,7 +19,6 @@ header-includes:
 - \usepackage{lscape}
 - \usepackage{pdfpages}
 - \usepackage{titling}
-- \usepackage{titling}
 - \pretitle{\begin{center}\LARGE\includegraphics[width=5cm]{logo.png}\\[\bigskipamount]}
 - \posttitle{\end{center}}
 editor_options: 
@@ -34,14 +33,14 @@ knitr::opts_chunk$set(echo = F, comment = "", warning = F, message = F, cache = 
 
 # Bevezetés
 
-AZ alábbi rövid kézirat a brit **Family Expenditure Survey** adataiból kinyert fogyasztási jellemzőket tárgyalja. Az empirikus elemzés egyszerű lineáris regresszió alkalmazásával készül. Az adatok összesen 1519 család jövedelmét és kiadását tartalmazza, továbbá 6 termékcsoport (alkohol, ruházkodás, nem alkoholtartalmú élelmiszer, fűtés, közlekedés, egyéb) fogyasztáson belüli részarányát. Dolgozatom során én kizárólag az egy gyermekes családokra szűkítem az elemzést^[Feladatkiírás által előírt megkötés.].
+Ay alábbi rövid kézirat a brit **Family Expenditure Survey** adataiból kinyert fogyasztási jellemzőket tárgyalja. Az empirikus elemzés egyszerű lineáris regresszió alkalmazásával készül. Az adatok összesen 1519 család jövedelmét és kiadását tartalmazza, továbbá 6 termékcsoport (alkohol, ruházkodás, nem alkoholtartalmú élelmiszer, fűtés, közlekedés, egyéb) fogyasztáson belüli részarányát. Dolgozatom során én kizárólag az egy gyermekes családokra szűkítem az elemzést^[Feladatkiírás által előírt megkötés.].
 
 # Elméleti megfontolás
 
-Miután az egyes termékek fogyasztáson belüli aránya adott, így egy egyszerű lineáris regresszióban magyarázóváltozónak választva a fogyasztási kiadás logaritmusát jól interpretálható eredményeket kapunk. Ebben a felírásban (1. egyenlet) $\gamma_j$ értelmezése az alábbi: a fogyasztás $1%$-kal magasabb értéke mellett c.p. várhatóan hány $\%P$-al változik meg $j$-edik termékcsoportra fordított kiadás teljes fogyasztáson belüli megoszlása.
+Miután az egyes termékek fogyasztáson belüli aránya adott, így egy egyszerű lineáris regresszióban magyarázóváltozónak választva a fogyasztási kiadás logaritmusát jól interpretálható eredményeket kapunk. Ebben a felírásban (1. egyenlet) $\gamma_j$ értelmezése az alábbi: a fogyasztás $1\%$-kal magasabb értéke mellett c.p. várhatóan hány $\%P$-al változik meg $j$-edik termékcsoportra fordított kiadás teljes fogyasztáson belüli megoszlása.
 
 \begin{equation}
-w_j = \beta_j + \gamma_jlog(cons)+u_j, \space j = 1,2,...,6
+w_j = \beta_j + \gamma_jlog(cons)+u_j, \quad j = 1,2,...,6
 \end{equation}
 
 Miután az egyes termékcsoportokra fordított kiadások arányainak összegének 1-nek kell lennie és a hibatagok várható értéke 0, így az 1. egyenlet alapján adóddik a következő összefüggés:
@@ -62,20 +61,22 @@ A 2. egyenletben $\beta_j$-k összege jelenít meg egy fogyasztás szintjétől 
 \end{split}
 \end{equation}
 
-Mivel az egyes $\gamma_j$ együttható megadják tehát, hogy a $j$-edik termék kereslete nő vagy csökken-e a fogyasztás növekedésével, így amennyiben a becsült együttható értéke 0 alatti (feletti), úgy a j-edik termékcsoportot inferior (luxus) jószágnak tekinthetjük közgazdasági értelemben.
+Mivel az egyes $\gamma_j$ együttható megadják tehát, hogy a $j$-edik termék kereslete nő vagy csökken-e a fogyasztás növekedésével, így amennyiben a becsült együttható értéke 0 alatti (feletti), úgy a j-edik termékcsoportra költött összeg várhatóan nagyobb hányadát teszi ki a teljes fogyasztásnak, ha a fogyaszás szintje alacsonyabb (magasabb).
 
 # Modellbecslés és hipotézis vizsgálat
 
 ## Becsült előjelek értelmezése
 
-Az 1. egyenlet által leírt lineáris regresszió modellekben szereplő $\gamma_j$ együtthatókat ismerteti az 1. ábra. Az ábráról leolvasható, hogy inferior jószágnak minősül az élelmiszer és a fűtés, míg az alkohol, a közlekedés, a ruházkodás és az egyéb termékcsoportba tartozó javak luxusjószágnak. Ez **az eredmény összhangban van azzal, amit empirikus vizsgálat nélkül mondanánk, ugyanis élelmiszerre és fűtésre mindenféle képpen szükséges egy bizonyos összeget kiadni.** Az alkohol fogyasztás és a ruházkodás szűkösség esetén visszaszorítható, a közlekedésnek is könnyen található olcsóbb alternatívája.
+Az 1. egyenlet által leírt lineáris regresszió modellekben szereplő $\gamma_j$ együtthatókat ismerteti az 1. ábra. Az ábráról leolvasható, hogy csökken a fogyasztáson belüli aránya az élelmiszernke és a fűtésnek, míg az alkohol, a közlekedés, a ruházkodás és az egyéb termékcsoportba tartozó javak aránya növekszik. Ez **az eredmény összhangban van azzal, amit empirikus vizsgálat nélkül mondanánk, ugyanis élelmiszerre és fűtésre mindenkor szükséges egy bizonyos összeget kiadni.** Az alkohol fogyasztás és a ruházkodás szűkösség esetén visszaszorítható, a közlekedésnek is könnyen található olcsóbb alternatívája. 
 
 ## Szignifikancia értelmezése
 
-**Statiszikai értemelben valamennyi meredekségi együttható szignifikánsnak bizonyult** (belátható ez abból is, hogy a paraméterbecslésekhez tartozó $95\%$-os konfidencia intervallumok egyikse sem tartalmazza a zérust), a empirikus szignifikanciaszint mindössze némely tengelymetszet esetében nem különbözik szignifikánsan 0-tól.
-Közgazdasági értelemben vett szignifikancia (a becsült hatások kellően nagyok-e ahhoz, hogy figyelmet fordítsunk rá) értelmezéséhez a 2. ábra szolgáltat információt. A két diagram vízszintes tengelyén látható a mintában szereplő fogyasztási értékek intervalluma, az *a)* panel függőleges tengelyén a termékcsoportok fogyasztáson belüli megoszlásának modellbecslése, míg a *b)* panelen az egyes termékcsoportokra fordított kiadás pénzben (szintén modellbecslés). A diagramokból kivehető, hogy ezen becsült paraméterek mentén jelentős átrendeződés van a termékekre fordított kiadások arányai között, míg a legkisebb kiadástól a legnagyobbig eljutunk. Az egyetlen viszonylag állandó fogyasztási aránnyal rendelkező terméktípus az alkohol. Ennek oka lehet, hogy az alkohol fogyasztás fogyasztási hányada nem lineáris függvénye a fogyasztás szintjének, ahogyan ezt a 3. ábra megvilágítja. Mind a kiemelten alacsony, mind a kiemelten magas fogyasztással rendelkező háztartások esetében alacsonyabb az alkoholra fordított kiadások aránya, mint a nem szélsőséges eseteknél. Előbbiek esetében valószínűleg nincs meg a forrás, amit szeszes italokra költenének, így vagy kevesebbet, vagy olcsóbb termékeket vásárolnak, míg utóbbiak esetében valószínűleg a kiemelkedő szocio-ökonómiai háttér folytán alacsonyabb a fogyasztás.
+**Statiszikai értemelben valamennyi meredekségi együttható szignifikánsnak bizonyult** (belátható ez abból is, hogy a paraméterbecslésekhez tartozó $95\%$-os konfidencia intervallumok egyikse sem tartalmazza a zérust), az empirikus szignifikanciaszint mindössze némely tengelymetszet esetében nem különbözik szignifikánsan 0-tól.
+Közgazdasági értelemben vett szignifikancia (a becsült hatások kellően nagyok-e ahhoz, hogy figyelmet fordítsunk rá) értelmezéséhez a 2. ábra szolgáltat információt. A két diagram vízszintes tengelyén látható a mintában szereplő fogyasztási értékek intervalluma, az *a)* panel függőleges tengelyén a termékcsoportok fogyasztáson belüli megoszlásának modellbecslése, míg a *b)* panelen az egyes termékcsoportokra fordított kiadás pénzben (szintén modellbecslés). A diagramokból kivehető, hogy ezen becsült paraméterek mentén jelentős átrendeződés van a termékekre fordított kiadások arányai között, amíg a legkisebb kiadástól a legnagyobbig eljutunk. Az egyetlen viszonylag állandó fogyasztási aránnyal rendelkező terméktípus az alkohol. Ennek oka lehet, hogy az alkohol fogyasztás fogyasztási hányada nem lineáris függvénye a fogyasztás szintjének, ahogyan ezt a 3. ábra megvilágítja. Mind a kiemelten alacsony, mind a kiemelten magas fogyasztással rendelkező háztartások esetében alacsonyabb az alkoholra fordított kiadások aránya, mint a nem szélsőséges eseteknél. Előbbiek esetében valószínűleg nincs meg a forrás, amit szeszes italokra költenének, így vagy kevesebbet, vagy olcsóbb termékeket vásárolnak, míg utóbbiak esetében valószínűleg a kiemelkedő szocio-ökonómiai háttér folytán alacsonyabb a fogyasztás.
 
 ```{r package & data}
+# SETUP ---------------------------------------------------------------------------------
+
 library(tidyverse)
 library(granatlib) # my personal package: https://github.com/MarcellGranat/granatlib
 theme_set(theme_granat())
@@ -85,6 +86,8 @@ dat <- rio::import('cons.xlsx') %>%
 ```
 
 ```{r}
+# Frequently used functions =============================================================
+
 f.pvalues <- function(x) {
   case_when(
     x <= .1 & x > .05  ~ '10%',
@@ -108,6 +111,11 @@ f.products <- function(x) {
 
 
 ```{r fig.cap = 'Termékcsoportonként becsült $\\gamma$ koefficiens', fig.height=3}
+# PART I. -------------------------------------------------------------------------------
+
+# a =====================================================================================
+
+### Statistical significance ############################################################
 dat %>% 
   {select(., CONS, which(str_detect(names(.), 'W')))} %>% 
   pivot_longer(-1, names_to = 'x', values_to = 'w') %>% 
@@ -128,6 +136,7 @@ dat %>%
 ```
 
 ```{r fig.cap = "A becsült paraméterek alapján az egyes termékcsoportok fogyasztása a teljes fogyasztás függvényében"}
+### Economic significance ###############################################################
 dat %>% 
   {select(., which(str_detect(names(.), 'W')))} %>% 
   apply(2, function(y) lm(data = data.frame(y, x = dat$CONS), 
@@ -188,6 +197,8 @@ dat %>%
 ## Együtthatók összegére tett előzetes feltevés ellenőrzése
 
 ```{r results='hide'}
+# c =====================================================================================
+
 dat %>% 
   select(CONS, which(str_detect(names(.), 'W'))) %>% 
   pivot_longer(-1) %>%
@@ -203,13 +214,26 @@ dat %>%
 
 ```
 
-A paraméterbecslések között fennálló algebrai kapcsolatot az alábbi módon elleőrzöm: (1) Regresszió becslése, melyben eredményváltozó, hogy egy $j$-edik terméknek mekkora a megoszlása a fogyasztáson belül, magyarázó változó pedig, hogy mely termékcsoportról van szó (egyszerű dummy) és a fogyasztás logaritmusának termékcsoporttal vett interakciója. (2) Ezen a modellen pedig már ellenőrizhetőek az előzetesen együtthatók összegére feltett megszorítások Wald-féle F-próbával. A 2. egyenletben ismertetett algebrai kapcsolat fennállásának nullhipotézisét, miszerint mindegyik együttható összege 1 nem tudjuk elutasítani (F-próba p-értéke $49,47\%$). A 3. egyenletben látott $H_0$-t - miszerint a fogyasztás logaritmusának egyes termékcsoportokhoz becsült együtthatóinak összege 1 - szintén nem lehet elvetni (F-próba p-értéke $99,99\%$).
+A paraméterbecslések között fennálló algebrai kapcsolatot az alábbi módon ellenőrzöm: (1) Regresszió becslése, melyben eredményváltozó, hogy egy $j$-edik terméknek mekkora a megoszlása a fogyasztáson belül, magyarázó változó pedig, hogy mely termékcsoportról van szó (egyszerű dummy) és a fogyasztás logaritmusának termékcsoporttal vett interakciója. (2) Ezen a modellen pedig már ellenőrizhetőek az előzetesen együtthatók összegére feltett megszorítások Wald-féle F-próbával. A 2. egyenletben ismertetett algebrai kapcsolat fennállásának nullhipotézisét, miszerint mindegyik együttható összege 1 nem tudjuk elutasítani (F-próba p-értéke $49,47\%$). A 3. egyenletben látott $H_0$-t - miszerint a fogyasztás logaritmusának egyes termékcsoportokhoz becsült együtthatóinak összege 1 - szintén nem lehet elvetni (F-próba p-értéke $99,99\%$).
 
 # Átlagos kiadási rugalmasságok
 
-Az előzőekben bemutatott lineráris modellben a fogyasztás logaritmusához rendelt együttható állandó volt, függetlenül attól, hogy mennyi az adott x-értéke. Azonban ahogyan az 
+Az előzőekben bemutatott lineráris modellben a fogyasztás logaritmusához rendelt együttható állandó volt, függetlenül attól, hogy mennyi az aktuális fogyasztás. Azonban itt a fogyasztáson belüli megoszlása a termékcsoportnak volt modellezve, nem a fogyasztásra fordított összeg. Érdemes megvizsgálni, hogy az egyes termékekre fordított összeg miként változik együtt a jöveledelemmel. Ehhez az átlagos kiadási rugalmasságot ($\ell$) választom megfelelő eszköznek, ami megmutatja, hogy $j$-edik termékre fordított összeg hány $\%$-kal változik meg várhatóan c. p., ha $1\%$-kal megnő a fogyasztás. Ez az érték viszont rögzített $\beta_j$ és $\gamma$ mellett sem lesz konstans a fogyasztás mértékének függvényében. A számszerűsítéséhez kiszámítom minden mintában lévő fogyasztóra ($i = 1,2,...,594$) a modellek alapján becsült kiadási rugalmasságot, és ezeknek az értékeknek veszem számtani átlagát mindegyik fogyasztó esetében. A paraméterbecslésekből és adatokból való levezetést a 4. egyenlet írja le.
 
-```{r}
+\begin{equation}
+\begin{split}
+\hat{w}_{0ji} &= \hat{\beta_j} + \hat{\gamma}_jlog(cons_i), \quad i = 1,2,...,594 \\
+\hat{w}_{1ji} &= \hat{\beta_j} + \hat{\gamma_j}log(cons_i \times 1,01)
+\end{split}
+\end{equation}
+$$\ell_j = \frac{\sum_{i = 1}^{594} \frac{\hat{w}_{1ji} \times 1,01cons - \hat{w}_{0ji} \times cons}{\hat{w}_{0ji} \times cons}}{594}$$
+
+A 6 termékcsoporthoz becsült átlagos kiadási rugalmasságot 4. ábra mutatja be. Mindegyik esetben 0-nál nagyobb értéket kaptunk, tehát mindegyik esetben **normál javakról** van szó, ahol a kiadás mértékének függvényében növekszik az egyes termékekre kiadott összeg.
+
+```{r fig.cap = "Regressziós modellek alapján becsült átlagos kiadási rugalmasság termékcsoportonként"}
+# b =====================================================================================
+# 
+### Mean ellasticity to CONS ############################################################
 dat %>% 
   {select(., which(str_detect(names(.), 'W')))} %>% 
   apply(2, function(y) lm(data.frame(y, CONS = dat$CONS), formula = y ~ log(CONS))) %>% 
@@ -229,37 +253,14 @@ dat %>%
   scale_fill_brewer(palette = 10, guide = F)
 ```
 
+# A modell bővítése
 
+A 3. ábra alapján belátható, hogy még a fogyasztás logaritmizálása után is felmerülhet, hogy a magyarázóváltozónak kvadratikus alakját is felhasználjuk a regresszióban. Dolgozatomban ezt a kiterjesztést a ruházkodás és az üzemanyag fogyasztásra fókuszálva vizsgálom el^[Feladatleírás által megadott korlátozás].
 
-
-
-
-
-```{r}
-f.ell <- function(y, x) {
-  data.frame(y, x) %>% 
-    lm(formula = y ~ x) %>% 
-    {beta <- .$coefficients %>% .['x']
-    broom::augment(.) %>% select(x, .fitted) %>%
-      mutate(ell = x*beta/.fitted)
-    } %>% 
-    pull(ell) %>% 
-    mean
-}
-
+```{r fig.cap = "A fűtés és ruházkodás fogyasztási hányadainak leírása az eredeti és a bővített modellel"}
+# PART II. ------------------------------------------------------------------------------
 dat %>% 
-  {select(., which(str_detect(names(.), 'W')))} %>% 
-  apply(2, function(y) f.ell(y = y, x = log(dat$CONS))) %>% 
-  {data.frame(x = f.products(names(.)), ell = .)} %>% 
-  ggplot(aes(x, ell)) + geom_col(fill = 'aquamarine4', color = 'grey40', size = 1) +
-  geom_hline(yintercept = 0, color = 'grey40', size = 1.2) +
-  labs(x = NULL, y = 'Átlagos rugalmasság')
-
-```
-
-```{r}
-dat %>% 
-  transmute(CONS = log(CONS), WCLOTH, WFUEL) %>% 
+  transmute(CONS = log(CONS), WCLOTH, WFUEL) %>% # neptun: AYCOPF
   pivot_longer(-1) %>% 
   mutate(
     name = f.products(name)
@@ -270,29 +271,137 @@ dat %>%
               aes(color = 'y~x'), se = F, size = 2) +
   geom_smooth(method = 'lm', formula = "y~poly(x, 2)", aes(color = 'y~x+x^2'), 
               se = F, size = 2) +
-  facet_wrap(~name) +
+  facet_wrap(~name, scales = 'free_y') +
   labs(y = expression(W[x]), x = expression(log(CONS)), color = NULL) + 
   scale_color_viridis_d()
 
 ```
+\pagebreak
 
 ```{r}
 dat %>% 
+    {mod1 <- lm(., formula = WCLOTH ~ I(log(CONS)))
+    mod2 <- lm(., formula = WCLOTH ~ I(log(CONS)) + I(log(CONS)^2))
+    merge(broom::tidy(mod1), broom::tidy(mod2), by = 'term', all = T)} %>% 
+  select(1, 2, 5, 6, 9) %>% 
+  mutate(
+    p.value.x = case_when(
+      p.value.x <= .1 & p.value.x > .05 ~ '*',
+      p.value.x <= .05 & p.value.x > .01 ~ '**',
+      p.value.x <= .01 ~ '***',
+      T ~ ''
+    ),
+    p.value.y = case_when(
+      p.value.y <= .1 & p.value.y > .05 ~ '*',
+      p.value.y <= .05 & p.value.y > .01 ~ '**',
+      p.value.y <= .01 ~ '***',
+      T ~ ''
+    )
+  ) %>% 
+  transmute(term = (c('Konstans', 'log(cons)', 'log(cons)^2')),
+            mod1 = str_c(format(estimate.x, decimal.mark = ',', digits = 3), p.value.x),
+            mod2 = str_c(format(estimate.y, decimal.mark = ',', digits = 3), p.value.y)
+            ) %>% 
+  knitr::kable(col.names = c('Változó', 'I. modell', 'II. modell'),
+              format.args = list(decimal.mark = ','), digits = 2,
+              caption = 'A ruházkodás fogyasztáson belüli
+              arányára becsült eredeti modell (I.) és a bővített modell (II.)',
+               align = c('l', 'c', 'c')) %>% 
+  kableExtra::footnote(symbol = c('10%-on szignifikáns', '5%-on szignifikáns',
+                                  '1%-on szignifikáns'), 
+                       symbol_manual = c('*', '**', '***'),
+                       symbol_title = 'Jelölések:') # TODO footnote
+```
+
+
+
+```{r}
+dat %>% 
+    {mod1 <- lm(., formula = WFUEL ~ I(log(CONS)))
+    mod2 <- lm(., formula = WFUEL ~ I(log(CONS)) + I(log(CONS)^2))
+    merge(broom::tidy(mod1), broom::tidy(mod2), by = 'term', all = T)} %>% 
+  select(1, 2, 5, 6, 9) %>% 
+  mutate(
+    p.value.x = case_when(
+      p.value.x <= .1 & p.value.x > .05 ~ '*',
+      p.value.x <= .05 & p.value.x > .01 ~ '**',
+      p.value.x <= .01 ~ '***',
+      T ~ ''
+    ),
+    p.value.y = case_when(
+      p.value.y <= .1 & p.value.y > .05 ~ '*',
+      p.value.y <= .05 & p.value.y > .01 ~ '**',
+      p.value.y <= .01 ~ '***',
+      T ~ ''
+    )
+  ) %>% 
+  transmute(term = (c('Konstans', 'log(cons)', 'log(cons)^2')),
+            mod1 = str_c(format(estimate.x, decimal.mark = ',', digits = 3), p.value.x),
+            mod2 = str_c(format(estimate.y, decimal.mark = ',', digits = 3), p.value.y)
+            ) %>% 
+  knitr::kable(col.names = c('Változó', 'I. modell', 'II. modell'),
+              format.args = list(decimal.mark = ','), digits = 2,
+              format = 'latex',
+              caption = 'A fűtés fogyasztáson belüli
+              arányára becsült eredeti modell (I.) és a bővített modell (II.)',
+               align = c('l', 'c', 'c')) %>% 
+  kableExtra::footnote(symbol = c('10%-on szignifikáns', '5%-on szignifikáns',
+                                  '1%-on szignifikáns'), 
+                       symbol_manual = c('*', '**', '***'),
+                       symbol_title = 'Jelölések:')
+```
+
+```{r}
+# PART III. -----------------------------------------------------------------------------
+# 
+# WCLOTH ================================================================================
+
+dat %>% 
+  select(WCLOTH, CONS) %>% 
   lm(formula = WCLOTH ~ I(log(CONS)) + I(log(CONS)^2)) %>% 
   broom::tidy() %>% 
-  prtbl()
+  prtbl('A  ruházkodás fogyasztáson belüli arányának becslése a kvadratikus alakkal bővített modellel')
 
-```
+# WFUEL =================================================================================
 
-```{r}
 dat %>% 
-  lm(formula = WFUEL ~ I(log(CONS)) + I(log(CONS)^2)) %>% 
+  select(WFUEL, CONS) %>% 
+  lm(formula = WCLOTH ~ I(log(CONS)) + I(log(CONS)^2)) %>% 
   broom::tidy() %>% 
-  prtbl()
-
+  prtbl('A fűtés fogyasztáson belüli arányának becslése a kvadratikus alakkal bővített modellel')
 ```
 
+
 ```{r}
+# PART III. -----------------------------------------------------------------------------
+
+dat %>% 
+  select(WCLOTH, WFUEL) %>% 
+  apply(2, function(y) {
+    mod1 <- lm(data = data.frame(y = y, x = log(dat$CONS)), formula = y ~ x)
+    coef1 <- mod1$coeff['x']
+    mod2 <- lm(data = data.frame(y = y, x = log(dat$CONS)), formula = y ~ x + x^2)
+    coef2 <- mean(predict.lm(newdata = data.frame(x = log(dat$CONS) + 1), object = mod2)
+                  - mod2$fitted)
+    data.frame(coef1, coef2)
+  }
+  ) %>% 
+  reduce(rbind) %>% 
+  transmute(var = c('Ruházkodás', 'Fűtés'), coef1, coef2) %>% 
+  set_names('Változó', 'I. modell', 'II. modell') %>% 
+  knitr::kable(
+    caption = 'Átlagos parciális hatás az eredeti modellben (I. modell) és a
+    kvadratikus komponenssel bővített modellben (II. modell)', 
+    align = c('l', 'c', 'c'),
+    format.args = list(digits = 3, decimal.mark = ',')
+  )
+```
+
+
+
+```{r}
+# PART V. -------------------------------------------------------------------------------
+
 dat %>% 
   mutate(
     class = cut(INCOME, breaks = quantile(dat$INCOME, probs = (0:3)/3), 
@@ -314,9 +423,6 @@ dat %>%
 
 # R kódok
 
-
-
-```{r  ref.label=setdiff(knitr::all_labels(), c("setup")), eval=FALSE, echo=T, attr.source='.numberLines'}
-
+```{r ref.label=setdiff(knitr::all_labels(), c("setup")), eval=FALSE, echo=T, attr.source='.numberLines'}
 ```
 

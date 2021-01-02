@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  22 DEC 2020 22:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.10.24)  29 DEC 2020 09:18
 entering extended mode
 **./econometrics_A3.tex
 (econometrics_A3.tex
@@ -388,51 +388,69 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@dimlist=\toks25
 
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geometry.c
-fg")) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\longtab
-le.sty"
+fg"))
+("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fancyvrb\fancyvrb.s
+ty"
+Package: fancyvrb 2020/05/03 v3.6 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count278
+\FV@InFile=\read2
+\FV@TabBox=\box49
+\c@FancyVerbLine=\count279
+\FV@StepNumber=\count280
+\FV@OutFile=\write3
+) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/framed\framed.sty
+"
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip54
+\fb@frw=\dimen161
+\fb@frh=\dimen162
+\FrameRule=\dimen163
+\FrameSep=\dimen164
+) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\longtable.s
+ty"
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip54
-\LTright=\skip55
-\LTpre=\skip56
-\LTpost=\skip57
-\LTchunksize=\count278
-\LTcapwidth=\dimen161
-\LT@head=\box49
-\LT@firsthead=\box50
-\LT@foot=\box51
-\LT@lastfoot=\box52
-\LT@cols=\count279
-\LT@rows=\count280
-\c@LT@tables=\count281
-\c@LT@chunks=\count282
+\LTleft=\skip55
+\LTright=\skip56
+\LTpre=\skip57
+\LTpost=\skip58
+\LTchunksize=\count281
+\LTcapwidth=\dimen165
+\LT@head=\box50
+\LT@firsthead=\box51
+\LT@foot=\box52
+\LT@lastfoot=\box53
+\LT@cols=\count282
+\LT@rows=\count283
+\c@LT@tables=\count284
+\c@LT@chunks=\count285
 \LT@p@ftn=\toks26
 )
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/booktabs\booktabs.s
 ty"
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen162
-\lightrulewidth=\dimen163
-\cmidrulewidth=\dimen164
-\belowrulesep=\dimen165
-\belowbottomsep=\dimen166
-\aboverulesep=\dimen167
-\abovetopsep=\dimen168
-\cmidrulesep=\dimen169
-\cmidrulekern=\dimen170
-\defaultaddspace=\dimen171
-\@cmidla=\count283
-\@cmidlb=\count284
-\@aboverulesep=\dimen172
-\@belowrulesep=\dimen173
-\@thisruleclass=\count285
-\@lastruleclass=\count286
-\@thisrulewidth=\dimen174
+\heavyrulewidth=\dimen166
+\lightrulewidth=\dimen167
+\cmidrulewidth=\dimen168
+\belowrulesep=\dimen169
+\belowbottomsep=\dimen170
+\aboverulesep=\dimen171
+\abovetopsep=\dimen172
+\cmidrulesep=\dimen173
+\cmidrulekern=\dimen174
+\defaultaddspace=\dimen175
+\@cmidla=\count286
+\@cmidlb=\count287
+\@aboverulesep=\dimen176
+\@belowrulesep=\dimen177
+\@thisruleclass=\count288
+\@lastruleclass=\count289
+\@thisrulewidth=\dimen178
 )
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/footnotehyper\footn
 otehyper.sty"
 Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
-\FNH@notes=\box53
-\FNH@width=\dimen175
+\FNH@notes=\box54
+\FNH@width=\dimen179
 )
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graphicx.s
 ty"
@@ -450,8 +468,8 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 105.
 )
-\Gin@req@height=\dimen176
-\Gin@req@width=\dimen177
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
 ) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/grffile\grffile.s
 ty"
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
@@ -463,29 +481,29 @@ line 40.
 ty"
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip58
-\f@nch@O@elh=\skip59
-\f@nch@O@erh=\skip60
-\f@nch@O@olh=\skip61
-\f@nch@O@orh=\skip62
-\f@nch@O@elf=\skip63
-\f@nch@O@erf=\skip64
-\f@nch@O@olf=\skip65
-\f@nch@O@orf=\skip66
+\f@nch@headwidth=\skip59
+\f@nch@O@elh=\skip60
+\f@nch@O@erh=\skip61
+\f@nch@O@olh=\skip62
+\f@nch@O@orh=\skip63
+\f@nch@O@elf=\skip64
+\f@nch@O@erf=\skip65
+\f@nch@O@olf=\skip66
+\f@nch@O@orf=\skip67
 ) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.sty
 "
 Package: babel 2020/10/06 3.50 The Babel package
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\babel.def"
 File: babel.def 2020/10/06 3.50 Babel common definitions
-\babel@savecnt=\count287
-\U@D=\dimen178
+\babel@savecnt=\count290
+\U@D=\dimen182
 \l@babelnohyphens=\language79
 
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/generic/babel\txtbabel.de
 f")
-\bbl@readstream=\read2
+\bbl@readstream=\read3
 )
-\bbl@dirlevel=\count288
+\bbl@dirlevel=\count291
 *************************************
 * Local config file bblopts.cfg used
 *
@@ -497,23 +515,23 @@ File: bblopts.cfg 2005/09/08 v0.1 add Arabic and Farsi to "declared" options of
 yar.ldf"
 Language: hungarian 2019/01/14 v1.5c Magyar (Hungarian) support for babel
 Package babel Info: Making ` an active character on input line 2819.
-\c@footnote@add=\count289
-\c@footnote@ch=\count290
+\c@footnote@add=\count292
+\c@footnote@ch=\count293
 )) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/natbib\natbib.st
 y"
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip67
-\bibsep=\skip68
+\bibhang=\skip68
+\bibsep=\skip69
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count291
+\c@NAT@ctr=\count294
 )
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 76.
+less on input line 116.
 
 
 Package Fancyhdr Warning: \fancyhead's `E' option without twoside option is use
-less on input line 77.
+less on input line 117.
 
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\lscape.sty
 "
@@ -526,70 +544,76 @@ Package: pdfpages 2020/01/28 v0.5q Insert pages of external PDF documents (AM)
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 ) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\calc.sty"
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count292
-\calc@Bcount=\count293
-\calc@Adimen=\dimen179
-\calc@Bdimen=\dimen180
-\calc@Askip=\skip69
-\calc@Bskip=\skip70
+\calc@Acount=\count295
+\calc@Bcount=\count296
+\calc@Adimen=\dimen183
+\calc@Bdimen=\dimen184
+\calc@Askip=\skip70
+\calc@Bskip=\skip71
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count294
-\calc@Cskip=\skip71
+\calc@Ccount=\count297
+\calc@Cskip=\skip72
 ) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eso-pic\eso-pic.s
 ty"
 Package: eso-pic 2020/09/27 v2.0i eso-pic (RN)
-\ESO@tempdima=\dimen181
-\ESO@tempdimb=\dimen182
+\ESO@tempdima=\dimen185
+\ESO@tempdimb=\dimen186
 )
-\AM@pagewidth=\dimen183
-\AM@pageheight=\dimen184
+\AM@pagewidth=\dimen187
+\AM@pageheight=\dimen188
 
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdfpages\pppdftex.d
 ef"
 File: pppdftex.def 2020/01/28 v0.5q Pdfpages driver for pdfTeX (AM)
 )
-\AM@pagebox=\box54
+\AM@pagebox=\box55
 \AM@global@opts=\toks27
-\AM@pagecnt=\count295
+\AM@pagecnt=\count298
 \AM@toc@title=\toks28
-\c@AM@survey=\count296
-\AM@templatesizebox=\box55
+\c@AM@survey=\count299
+\AM@templatesizebox=\box56
+) ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/titling\titling.s
+ty"
+Package: titling 2009/09/04 v2.1d maketitle typesetting
+\thanksmarkwidth=\skip73
+\thanksmargin=\skip74
+\droptitle=\skip75
 )
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3backend
 -pdftex.def"
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
-\l__kernel_color_stack_int=\count297
-\l__pdf_internal_box=\box56
+\l__kernel_color_stack_int=\count300
+\l__pdf_internal_box=\box57
 ) (econometrics_A3.aux)
 \openout1 = `econometrics_A3.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
-LaTeX Font Info:    ... okay on input line 93.
-LaTeX Info: Redefining \microtypecontext on input line 93.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 136.
+LaTeX Font Info:    ... okay on input line 136.
+LaTeX Info: Redefining \microtypecontext on input line 136.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 93.
+LaTeX Info: Redefining \showhyphens on input line 136.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -602,16 +626,16 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pd
 f.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count298
-\scratchdimen=\dimen185
-\scratchbox=\box57
-\nofMPsegments=\count299
-\nofMParguments=\count300
+\scratchcounter=\count301
+\scratchdimen=\dimen189
+\scratchbox=\box58
+\nofMPsegments=\count302
+\nofMParguments=\count303
 \everyMPshowfont=\toks29
-\MPscratchCnt=\count301
-\MPscratchDim=\dimen186
-\MPnumerator=\count302
-\makeMPintoPDFobject=\count303
+\MPscratchCnt=\count304
+\MPscratchDim=\dimen190
+\MPnumerator=\count305
+\makeMPintoPDFobject=\count306
 \everyMPtoPDFconversion=\toks30
 )
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\epstop
@@ -620,7 +644,7 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-Package hyperref Info: Link coloring OFF on input line 93.
+Package hyperref Info: Link coloring OFF on input line 136.
 
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.st
 y"
@@ -634,11 +658,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ttitlestring.sty"
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count304
+\c@section@level=\count307
 )
-LaTeX Info: Redefining \ref on input line 93.
-LaTeX Info: Redefining \pageref on input line 93.
-LaTeX Info: Redefining \nameref on input line 93.
+LaTeX Info: Redefining \ref on input line 136.
+LaTeX Info: Redefining \pageref on input line 136.
+LaTeX Info: Redefining \nameref on input line 136.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -682,34 +706,39 @@ Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 LaTeX Info: Redefining \cal on input line 497.
 LaTeX Info: Redefining \mit on input line 498.
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-5.
+<logo.png, id=3, 398.48875pt x 283.0575pt>
+File: logo.png Graphic file (type png)
+<use logo.png>
+Package pdftex.def Info: logo.png  used on input line 137.
+(pdftex.def)             Requested size: 142.26407pt x 101.05406pt.
+LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
+37.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-5.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+37.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-95.
+137.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-95.
+137.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 95.
+(Font)              <12> on input line 137.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 95.
+(Font)              <8> on input line 137.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 95.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
-
+(Font)              <6> on input line 137.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 137
+.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
@@ -717,8 +746,8 @@ File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 g"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 137
+.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
@@ -733,60 +762,100 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 2.
 )
-\tf@toc=\write3
-\openout3 = `econometrics_A3.toc'.
+\tf@toc=\write4
+\openout4 = `econometrics_A3.toc'.
 
-<econometrics_A3_files/figure-latex/unnamed-chunk-2-1.pdf, id=16, 469.755pt x 2
-16.81pt>
-File: econometrics_A3_files/figure-latex/unnamed-chunk-2-1.pdf Graphic file (ty
-pe pdf)
-<use econometrics_A3_files/figure-latex/unnamed-chunk-2-1.pdf>
-Package pdftex.def Info: econometrics_A3_files/figure-latex/unnamed-chunk-2-1.p
-df  used on input line 118.
-(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
 [1
 
 
-{C:/Users/user/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+{C:/Users/user/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./logo.png>]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-59.
+56.
 ("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-<econometrics_A3_files/figure-latex/unnamed-chunk-11-1.pdf, id=47, 469.755pt x 
-325.215pt>
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 157.
+LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
+162.
+("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ts1lmtt.fd"
+File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+<econometrics_A3_files/figure-latex/unnamed-chunk-1-1.pdf, id=57, 469.755pt x 1
+44.54pt>
+File: econometrics_A3_files/figure-latex/unnamed-chunk-1-1.pdf Graphic file (ty
+pe pdf)
+<use econometrics_A3_files/figure-latex/unnamed-chunk-1-1.pdf>
+Package pdftex.def Info: econometrics_A3_files/figure-latex/unnamed-chunk-1-1.p
+df  used on input line 200.
+(pdftex.def)             Requested size: 469.75386pt x 144.53963pt.
+[2 <./econometrics_A3_files/figure-latex/unnamed-chunk-1-1.pdf>] [3]
+
+LaTeX Warning: Command \' invalid in math mode on input line 291.
+
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 2
+92.
+("C:\Users\user\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ts1lmr.fd"
+File: ts1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+<econometrics_A3_files/figure-latex/unnamed-chunk-4-1.pdf, id=85, 469.755pt x 2
+16.81pt>
+File: econometrics_A3_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (ty
+pe pdf)
+<use econometrics_A3_files/figure-latex/unnamed-chunk-4-1.pdf>
+Package pdftex.def Info: econometrics_A3_files/figure-latex/unnamed-chunk-4-1.p
+df  used on input line 319.
+(pdftex.def)             Requested size: 469.75386pt x 216.80946pt.
+[4 <./econometrics_A3_files/figure-latex/unnamed-chunk-4-1.pdf>] [5]
+
+LaTeX Warning: Command \' invalid in math mode on input line 436.
+
+[6]
+<econometrics_A3_files/figure-latex/unnamed-chunk-11-1.pdf, id=135, 469.755pt x
+ 325.215pt>
 File: econometrics_A3_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (t
 ype pdf)
 <use econometrics_A3_files/figure-latex/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: econometrics_A3_files/figure-latex/unnamed-chunk-11-1.
-pdf  used on input line 216.
+pdf  used on input line 519.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[2]
-Overfull \vbox (6.35611pt too high) has occurred while \output is active []
-
-[3 <./econometrics_A3_files/figure-latex/unnamed-chunk-2-1.pdf>] [4 <./economet
-rics_A3_files/figure-latex/unnamed-chunk-11-1.pdf>] (econometrics_A3.aux) ) 
+[7 <./econometrics_A3_files/figure-latex/unnamed-chunk-11-1.pdf>] [8] [9] (econ
+ometrics_A3.aux) ) 
 Here is how much of TeX's memory you used:
- 16000 strings out of 480236
- 243247 string characters out of 2879096
- 599663 words of memory out of 3000000
- 32203 multiletter control sequences out of 15000+200000
- 586585 words of font info for 85 fonts, out of 3000000 for 9000
+ 16713 strings out of 480236
+ 254316 string characters out of 2879096
+ 611956 words of memory out of 3000000
+ 32825 multiletter control sequences out of 15000+200000
+ 598656 words of font info for 113 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 71i,11n,77p,522b,479s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/
-Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-ec.enc}<C:/U
-sers/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx10.pfb><C
-:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmbx12.pfb
-><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr10.p
-fb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12
-.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr
-17.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/l
-mri10.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/l
-m/lmtt10.pfb>
-Output written on econometrics_A3.pdf (4 pages, 254255 bytes).
+ 71i,11n,77p,522b,484s stack positions out of 5000i,500n,10000p,200000b,50000s
+{C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dv
+ips/lm/lm-rm.enc}{C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvi
+ps/lm/lm-mathit.enc}{C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/
+dvips/lm/lm-mathsy.enc}{C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/e
+nc/dvips/lm/lm-ec.enc}{C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/en
+c/dvips/lm/lm-ts1.enc}<C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
+pe1/public/lm/lmbx10.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fonts
+/type1/public/lm/lmbx12.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9/fo
+nts/type1/public/lm/lmmi10.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2.9
+/fonts/type1/public/lm/lmmi5.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX 2
+.9/fonts/type1/public/lm/lmmi7.pfb><C:/Users/user/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/lm/lmr10.pfb><C:/Users/user/AppData/Local/Programs/MiKT
+eX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/user/AppData/Local/Programs/Mi
+KTeX 2.9/fonts/type1/public/lm/lmr17.pfb><C:/Users/user/AppData/Local/Programs/
+MiKTeX 2.9/fonts/type1/public/lm/lmr5.pfb><C:/Users/user/AppData/Local/Programs
+/MiKTeX 2.9/fonts/type1/public/lm/lmr6.pfb><C:/Users/user/AppData/Local/Program
+s/MiKTeX 2.9/fonts/type1/public/lm/lmr7.pfb><C:/Users/user/AppData/Local/Progra
+ms/MiKTeX 2.9/fonts/type1/public/lm/lmr8.pfb><C:/Users/user/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/lm/lmri10.pfb><C:/Users/user/AppData/Local/Pr
+ograms/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/user/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy7.pfb><C:/Users/user/AppData/Loc
+al/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtk10.pfb><C:/Users/user/AppData/
+Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtt10.pfb><C:/Users/user/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmtti10.pfb>
+Output written on econometrics_A3.pdf (9 pages, 500879 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
- 38 named destinations out of 1000 (max. 500000)
- 12403 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 322 PDF objects out of 1000 (max. 8388607)
+ 59 named destinations out of 1000 (max. 500000)
+ 14517 words of extra memory for PDF output out of 17280 (max. 10000000)
 

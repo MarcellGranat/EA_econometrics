@@ -18,30 +18,37 @@ header-includes:
 - \fancyfoot[C]{\thepage}
 - \usepackage{lscape}
 - \usepackage{pdfpages}
+- \usepackage{titling}
+- \pretitle{\begin{center}\LARGE\includegraphics[width=5cm]{logo.png}\\[\bigskipamount]}
+- \posttitle{\end{center}}
 editor_options: 
   chunk_output_type: inline
 ---
 
 ```{r setup, include=FALSE, warning=F}
-knitr::opts_chunk$set(echo = F, comment = "", warning = F, message = F, cache = F, dev = "cairo_pdf", error = T)
+knitr::opts_chunk$set(echo = T, comment = "", warning = F, message = F, cache = T, dev = "cairo_pdf", error = T)
 ```
+
+\pagebreak
+
+# 1. feladat
 
 *A mellékelt bptempm.csv fájl tartalmazza a budapesti havi átlaghőmérsékletet 1901 januárja és 2000 decembere között. (A read.csv függvény használható az adatok beolvasására.) A hallgatóknak különböző, 60 éves idősorokat kell elemezniük, a Neptun-kódjuk első karaktere alapján: 1901-1960 (A-C), 1911-1970 (D-F), 1921-1980 (G-I), 1931-1990 (J-P), 1940-1999 (Q-Z vagy szám).*
 
-```{r}
+```{r package}
 library(tidyverse)
 library(granatlib) # my personal package: https://github.com/MarcellGranat/granatlib
 library(tseries)
 library(forecast)
 theme_set(theme_granat())
 rio::import('bptempm.csv') %T>% 
-  {filter(., ym < 196101) %T>%  # data import, NEPTUN: AYCOPF
+  {filter(., 190012 < ym & ym < 196101) %T>%  # data import, NEPTUN: AYCOPF
       {dat <<- .} %>%
       pull(temp) %>%
-      ts(start = c(1969, 3), frequency = 12) %>%
+      ts(start = c(1911, 1), frequency = 12) %>%
       {x <<- .} # as ts
   } %>% mutate(
-    AR = lag(temp)
+    AR = lag(temp) # auto-regressive term
   ) %>% 
   filter(ym < 196201 & ym > 196012) %>% transmute(
     t = V1,
@@ -51,25 +58,23 @@ rio::import('bptempm.csv') %T>%
   {test_dat <<- .} # test data for 1.j
 ```
 
-
-
-# 1. feladat
-
 ## a)
 
 *Ábrázoljuk az idősor autokorreláció-függvényét! Mire utal a függvény alakja?*
 
-```{r fig.cap = "A budapesti havi átlaghőmérséklet autokorreláció függvényei", fig.height=3}
+```{r fig.cap = "A budapesti havi átlaghőmérséklet korrelogramja", fig.height=2}
 x %>% {
   ggpubr::ggarrange(
-    forecast::ggAcf(., size = 2, color = "chartreuse") + labs(title = ''),
-    forecast::ggAcf(., size = 2, type = 'partial', color = "chartreuse") +
+    forecast::ggAcf(., size = 2, color = "aquamarine4") + labs(title = ''),
+    forecast::ggAcf(., size = 2, type = 'partial', color = "aquamarine4") +
       labs(title = '')
   )
 }
 ```
 
-## b)♦
+A autkorreláció-függvény alakja arra utal, hogy szezonalitás van a modellben (1. ábra).
+
+## b)
 
 *Illesszünk lineáris trendet és hónap-dummykat tartalmazó modellt az idősorra!*
 
@@ -86,7 +91,7 @@ mod1 <- dat %>% transmute(
 *Értelmezzük a modell paramétereit!*
 
 ```{r}
-f.month <- function(x) {
+f.month <- function(x) { # for nice outputs
   y <- switch(x,
               't' = 'trend',
               'm1' = 'január',
@@ -111,7 +116,25 @@ mod1 %>% broom::tidy() %>%
   select(1:2) %>% mutate(
     term = sapply(term, f.month)
   ) %>% 
-  prtbl(ufc = T)
+  prtbl('1. modell becsült paramétereinek értéke', ufc = T)
+```
+
+A modellben szerepel 1 lineáris trend komponens, 1 konstans és 11 dummy változó. Előbbi megmutatja, hogy hónapról hónapra átlagosan miként módosul az átlaghőmérséklet kontrolálva az adott hónapok jellemző átlaghőmérsékletére, ami a konstans és a 11 dummy változó alapján határozódik meg. Az egyes dummy változók értékei megmutatják, hogy c.p. várhatóan mennyivel nagyobb az átlaghőmérséklet egy adott hónapban, mint januárban (referencia érték). Például a $\beta_{Február}$ alapján elmondható, hogy a februári hónapokban c.p. átlagosan 1,62°C-kal van melegebb, mint a januári hónapokban. Januári hónap esetén a várható átlagos hőmérsékletet a $\beta_{Konstans}$ adja meg. Ezek az értékek azonban csak 1911. januárjában igazak, mivel mindegyik hónapban nő a várható érték a $\beta_{Trend}$ értékkel. Az így meghatározott becsült átlagos havi hőmérsékletet a 2. ábra mutatja be.
+
+```{r fig.cap = "Modell alapján becsült átlaghőmérséklet a megfigyelt időszakra hónap szerinti csoportosításban", fig.height=3}
+mod1 %>% 
+  broom::augment() %>% 
+  mutate(m = sapply(str_c('m', m), f.month)) %>%  
+  mutate(m = factor(m, levels = unique(m))) %>% 
+  {ggplot(.) +
+  geom_line(aes(t, .fitted, color = m), size = 1.2) +
+  scale_x_continuous(expand = c(0,0), 
+                     breaks = seq(from = 1, to = nrow(.), by = 120),
+                     labels = seq(from = 1901, to = 1960, by = 10)
+                     )} +
+  scale_color_viridis_d(option = 'C') + 
+  labs(x = NULL, y = expression(''*~degree*C*''), color = NULL) +
+  theme(legend.position = 'right')
 ```
 
 ## d)
@@ -119,18 +142,19 @@ mod1 %>% broom::tidy() %>%
 *Teszteljük, hogy a modell reziduálisai autokorreláltak-e!*
 
 ```{r}
-f.Ljung.Box.p <- function(x) {
+f.Ljung.Box.p <- function(x) { # frequently used in this assignment ---> function(...)
   capture.output( # avoid redundant printing
     checkresiduals(x, plot = F)
   ) %>% .[5] %>% # main text description
-    str_remove('.*p-value = ') %>% # p-value of the test
+    str_remove('.*p-value = ') %>% # extract p-value of the test
     as.numeric() %>% 
     scales::percent(decimal.mark = ',', accuracy = .01)
 }
 
-answer_1d <- f.Ljung.Box.p(mod1)
-answer_1d
+answer_1d <- f.Ljung.Box.p(mod1) # used as inline code as the p-value
 ```
+
+A modell rezidulálisainak autokorrelációra való tesztelésére Ljung-Box tesztet alkalmaztam 16^[forecast::checkresiduals függvény által az idősor hossza alapján optimálisnak ítélt érték.]  késleltetéssel. Miután a p-érték `r answer_1d`, így elvetjük a $H_0$-t, miszerint nem lenne autokorreláció a maradéktagban. Tehát autokorreláltak a reziduálisok.
 
 ## e)
 
@@ -139,8 +163,8 @@ answer_1d
 ```{r}
 mod2 <- dat %>% transmute(
   t = V1,
-  m = as.factor(ym %% 100),
-  AR = lag(temp),
+  m = as.factor(ym %% 100), # shortcut for getting the month variable
+  AR = lag(temp), # auto-regressive part
   temp = temp
 ) %>% na.omit() %>% 
   lm(formula = temp ~ .)
@@ -151,8 +175,10 @@ mod2 <- dat %>% transmute(
 *Teszteljük, hogy a reziduálisok autokorreláltak-e!*
 
 ```{r}
-answer_1f <- f.Ljung.Box.p(mod2)
+answer_1f <- f.Ljung.Box.p(mod2) # defined in this doc formerly
 ```
+
+A már autoregresszív tagot is tartalmazó modell reziduálisán elvégzett Ljung-Box teszt empirikus szignifikaszintje `r answer_1f`, így nem tudjuk elvetni a nullhipotézist, azaz a **modell maradéktagjai nem autokorreláltak.**
 
 ## g)
 
@@ -176,9 +202,16 @@ mod3 <- dat %>% transmute(
 answer_1h <- f.Ljung.Box.p(mod3)
 ```
 
+Mivel az AR(2) tagot tartalmazó modell maradéktagjain elvégzett Ljung-Box teszt p-értéke `r answer_1h`, így csak az **AR(1) tagot tartalmazó modell** az, amelynek reziduumai nem autokorreláltak, tehát ezzel vagyunk a "legelégedettebbek" (paraméterek intevallumai és a tesztek csak ezen validak, előrejelezni is vele érdemes).
+
 ## i)
 
 *Összességében van bizonyítékunk a klímaváltozásra ezen az időtávon Budapesten?*
+
+Amennyiben a klímaváltozás alatt azt értjük, hogy valamely irányba megváltozott volna a várható átlaghőmérséklet, úgy a tesztelendő nullhipotézisünk, hogy $\beta_{trend}$ nem különbözik nullától (kétoldali próba). Ebben az esetben felhasználhatjuk a modellünk paraméterbecsléseit tartalmazó táblázatból a trend komponens parcális t-próbájához tartozó p-értéket a döntésünkhöz. Mivel annak értéke 14,01% (2. táblázat), így **nem tudjuk elutasítani a nullhipotézist és kijelenteni, hogy lenne bizonyítékunk a klímaváltozásra.**
+Ezzel szemben a próba megfogalmazható egyoldalúként is, így: $H_0: \beta_{trend} \leq 0$, és csak felső kritikus értéket kell meghatároznunk a t-statisztikához. Mindazonáltal
+$$c_f (jobboldali): t_{1-\alpha}(n-k-1) > c_f (kétoldali): t_{1-\frac{\alpha}{2}}(n-k-1),$$
+így **ebben az esetben sem tudnánk a gyakorlatban bevett szignifikanciaszinteken elutasítani** "klímaváltozatlanságot" jelentő **$H_0$-t.**
 
 ```{r}
 mod2 %>% 
@@ -186,10 +219,14 @@ mod2 %>%
   mutate(
     term = sapply(term, f.month)
   ) %>% 
-  prtbl()
+  prtbl('Az AR(1) tagot tartalmazó modell paraméterbecslései')
 ```
 
-```{r fig.cap='A budapesti hőmérséklet előrejelzése az első 2 modellel'}
+## j)
+
+*Jelezzük előre az első és a második modell alapján a havi átlaghőmérsékletet a mintaidőszak utáni évre, és ábrázoljuk az előrejelzéseket a ténylegesen bekövetkezett értékekkel együtt!*
+
+```{r fig.cap='A budapesti havi átlaghőmérséklet előrejelzése'}
 data.frame(
   t = 1:12,
   temp = test_dat$temp,
@@ -222,7 +259,7 @@ data.frame(
 ```{r}
 data(earns, package = 'wooldridge')
 dat <- earns %>% 
-  filter(year <= 1979) # surname: Granát
+  filter(year <= 1979) # surname: Granat
 ```
 
 
@@ -231,43 +268,85 @@ dat <- earns %>%
 *Modellezzük először az órabér növekedési ütemét (ghrwage) a termelékenység növekedési üteme (goutphr) függvényében!*
 
 ```{r}
-mod1 <- lm(data = dat, formula = ghrwage ~ goutphr)
+mod4 <- lm(data = dat, formula = ghrwage ~ goutphr)
 ```
 
 ## b)
 
-```{r}
-mod1 %>% broom::tidy() %>% prtbl()
-```
+*Értelmezzük a becsült paramétereket!*
 
 ```{r}
-f.Ljung.Box.p(mod1)
+mod4 %>% broom::tidy() %>% prtbl('Egyszerű lineáris regresszió az idősorokon') # TODO interpret
 ```
+
+Ha az idei termelékenységi ütem megegyezik a tavalyival, akkor várhatóan az idei bérnövekedés is meg fog egyezni a tavalyival (3. táblázat: $\beta_{konstans}$). Ha az idei termelékenységi ütem a tavalyihoz képest nő $1\%P$-al, akkor várhatóan az idei bérnövekedés is emelkedni fog a tavalyihoz képest $0,66\%P$-al.
+
+## c)
+
+*Autokorreláltak-e a modell hibatagjai?*
+
+```{r}
+answer_2c <- f.Ljung.Box.p(mod4)
+```
+
+Mivel a Ljung-Box teszt p-értéke `r answer_2c`, így nem tudjuk elutasítani a $H_0$-t, tehát nem autokorreláltak a hibatagok.
+
+## d)
 
 *Teszteljük, hogy goutphr becsült paramétere különbözik-e egytől! Hogyan használtuk fel a teszt elvégzése során a c. feladatrész eredményét?*
 
 ```{r eval = F}
-mod1 %>% 
-  car::linearHypothesis('goutphr = 1') 
+mod4 %>% 
+  car::linearHypothesis('goutphr = 1')
 ```
+
+A tesztet Wald-féle F-próbával hajtom végre a megjelölt lineáris restrikcióval, így a $H_0$ szerint a becsült paraméter nem különbözik szignifikánsan 0-tól. Az empirikus szignifikancia szint 7,41%, így a döntés függ a válaszott $\alpha$ értéktől. Mivel az idősor igen rövid (kevesebb, mint 30 megfigyelés), így javasolt magasabb szignifikanciaszintet választani (10%), és elvetni a nullhipotézist, tehát különbözik szignifikánsan 1-től a becsült paraméter értéke.
+A *c)* feladatrész eredménye jelen számítás során azért fontos, mert ha autokorreláció lenne a regresszióban, úgy az intervallumbecslések és a *tesztek torzítottá válnának*, ebből következően az előbbiekben leírtak nem állnák meg a helyüket.
+
+## e)
 
 *Elemezzük ezután az órabér növekedési ütemét a termelékenység növekedési ütemének elsőrendű osztott késleltetésű modelljével!*
 
-```{r}
-library(dynlm)
 
-mod2 <- dynlm(data = dat, formula = ghrwage ~ L(goutphr))
+```{r}
+mod5 <- dat %>% 
+  mutate(
+    l.goutphr = lag(goutphr) # add lagged variable
+  ) %>% 
+  lm(formula = ghrwage ~ goutphr + l.goutphr)
 ```
 
 
+## f)
+
+*Értelmezzük a becsült paramétereket!*
+
 ```{r}
-mod2 %>% 
+mod5 %>% 
   broom::tidy() %>% 
-  prtbl()
+  prtbl('Az osztott késleltetsésű modell paramétereinek becslése')
 ```
+
+Ha a termelékenység növekedési üteme nem változik, akkor hosszútávon az órabér növekedési üteme $0,37\%P$-al fog csökenni évente ($\beta_{konstans}$).
+Amennyiben $1\%P$-al nagyobb a termelékenység növekedési üteme az egyik évben, mint a korábbiban, úgy várhatóan c.p. $0,64\%P$-al ($\beta_{goutphr}$) lesz magasabb az órabér növekedési üteme ugyanabb az évben a korábbihoz képest.
+Amennyiben permanens módon $1\%P$-al megemelkedik a termelékenység növekedési üteme, úgy várhatóan c.p. $0,97\%P$-al ($\beta_{goutphr}+\beta_{l.goutphr}$) lesz majd magasabb az órabér növekedési üteme hosszútávon.
+
+## g)
+
+*Autokorreláltak-e a modell hibatagjai?*
 
 ```{r}
-f.Ljung.Box.p(mod2)
+answer_2g <- f.Ljung.Box.p(mod5)
 ```
 
+A modell reziduumain elvégzett Ljung-Box teszt p-értéke `r answer_2g`, ami alapján nincs autokorreláció a modell hibatagjaiban.
 
+## h)
+
+*Teszteljük, hogy az azonnali és a késleltetett hatás összege különbözik-e egytől! Értelmezzük az eredményt!*
+
+```{r eval = F}
+mod5 %>% car::linearHypothesis('goutphr + l.goutphr = 1')
+```
+
+A tesztet Wald-féle F-próbával végeztem el, az empirikus szignifikanciaszint 92,41%, így semmilyen gyakorlatban bevett $\alpha$ mellett nem tudjuk elvetni a $H_0$-t, tehát a két paraméter becsült értékének összege **nem különbözik szignifikánsan 1-től.**
